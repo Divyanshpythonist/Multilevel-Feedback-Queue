@@ -1,11 +1,20 @@
 # multilevel-feedback-queue
 C program to simulate multilevel feedback queue scheduler
 
-Multi-level feedback queue scheduler Q consists of 3 linear queues, i.e., Q1, Q2, and Q3.
+This Scheduling is like Multilevel Queue(MLQ) Scheduling but in this process can move between the queues. Multilevel Feedback Queue Scheduling (MLFQ) keep analyzing the behavior (time of execution) of processes and according to which it changes its priority.Now, look at the diagram and explanation below to understand it properly.
 
-Q1 is round robin with time quantum 5 (RR5),
-Q2 is round robin with time quantum 8 (RR8), and
-Q3 follows first come first serve (FCFS)
-The process cannot be executed in the lower queue if there are any jobs in all higher queues. For example, Q1 has 5 processes, Q2 has 1 process, and Q3 has 1 process. Then, first the process in Q1 should be executed (and completed), and then a process in Q2 is executed. Finally, Q3 will get CPU resource.
-A new process enters queue Q1 which is served RR5. • When it gains CPU, a process receives 5 milliseconds. • If it does not finish in 5 milliseconds, the process is moved to queue Q2. • At Q2 process is again served RR8 and receives 8 additional milliseconds. • If it still does not complete, it is preempted and moved to queue Q3. • At Q3 process is executed by first come first serve. • If it still does not complete, it is processed at Q2 until completed.
+Now let us suppose that queue 1 and 2 follow round robin with time quantum 4 and 8 respectively and queue 3 follow FCFS.One implementation of MFQS is given below –
+
+When a process starts executing then it first enters queue 1.
+In queue 1 process executes for 4 unit and if it completes in this 4 unit or it gives CPU for I/O operation in this 4 unit than the priority of this process does not change and if it again comes in the ready queue than it again starts its execution in Queue 1.
+If a process in queue 1 does not complete in 4 unit then its priority gets reduced and it shifted to queue 2.
+Above points 2 and 3 are also true for queue 2 processes but the time quantum is 8 unit.In a general case if a process does not complete in a time quantum than it is shifted to the lower priority queue.
+In the last queue, processes are scheduled in FCFS manner.
+A process in lower priority queue can only execute only when higher priority queues are empty.
+A process running in the lower priority queue is interrupted by a process arriving in the higher priority queue.
+Well, above implementation may differ for example the last queue can also follow Round-robin Scheduling.
+
+Problems in the above implementation – A process in the lower priority queue can suffer from starvation due to some short processes taking all the CPU time.
+Solution – A simple solution can be to boost the priority of all the process after regular intervals and place them all in the highest priority queue.
+
 OUTPUT: The remaining time of processes in each queue level, total waiting time and total turnaround time are displayed.
