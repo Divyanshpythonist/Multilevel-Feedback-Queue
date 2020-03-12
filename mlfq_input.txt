@@ -1,0 +1,18 @@
+multilevel feedback queue input
+
+process    burst time    arrival time   
+
+  p1           53            0
+  p2           17            0
+  p3           68            0
+  p4           24            0
+  
+  
+  output---
+  
+Process		RT		WT		TAT		
+
+B		17		17		34
+D		7		101		125
+A		11		83		94		
+C		26		94		120	
